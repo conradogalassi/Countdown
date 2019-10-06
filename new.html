@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CountDown de la carrera</title>
+</head>
+<body>
+    <div id='app'></div>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        const _segundo = 1000;
+        const _minuto = _segundo * 60;
+        const _hora = _minuto * 60;
+        const _dia = _hora * 24;
+        const _mes = _dia * 30;
+
+        function diferenciaFechas() {
+            const endDate = new Date('2020-01-15');
+            const diferencia = endDate - Date.now();
+            const meses = Math.floor(diferencia / _mes)
+            const dias = Math.floor((diferencia % _mes) / _dia);
+            const horas = Math.floor((diferencia % _dia) / _hora);
+            const minutos = Math.floor((diferencia % _hora) / _minuto);
+            const segundos = Math.floor((diferencia % _minuto) / _segundo);
+
+            return <h1>Faltan solo {meses} meses, {dias} dias, {horas} hora, {minutos} minutos y {segundos} segundos para que se termine el curso</h1>;
+        }
+
+        window.setInterval(() => {
+            ReactDOM.render(diferenciaFechas(), document.getElementById('app'));
+        }, 1000);
+    </script>
+</body>
+</html>
